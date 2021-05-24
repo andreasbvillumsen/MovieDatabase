@@ -1,14 +1,10 @@
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using Moq;
-using MovieDatabase.Controllers;
 using MovieDatabase.Core.ApplicationLogic.implementation;
 using MovieDatabase.Core.DomainLogic;
-using MovieDatabase.Data;
 using MovieDatabase.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using Xunit;
 
 namespace XUnitMoviesTest
