@@ -44,7 +44,7 @@ pipeline {
             steps {
 				sh "docker-compose pull"
 				sh "docker-compose up flyway"
-				sh "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d frontend backend"
+				sh "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
 

@@ -1,0 +1,11 @@
+version: "3.3"
+
+services: 
+  web:
+    image: gruppe1devops/moviedatabase
+    environment: 
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on: 
+      - database
+    ports: 
+      - 5000:5000
