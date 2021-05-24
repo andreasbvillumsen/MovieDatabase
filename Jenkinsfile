@@ -12,12 +12,6 @@ pipeline {
 			}
 		}
 
-        stage("Build database") {
-            steps {
-                echo "===== OPTIONAL: Will build the database (if using a state-based approach) ====="
-            }
-        }
-
         stage("Test Web") {
             steps {
                 sh "dotnet test XUnitMoviesTest/XUnitMoviesTest.csproj"
@@ -40,10 +34,15 @@ pipeline {
             }
         }
 
+        stage("Build database") {
+            steps {
+                sh "docker-compose pull"
+				sh "docker-compose up flyway"
+            }
+        }
+
         stage("Release staging environment") {
             steps {
-				sh "docker-compose pull"
-				sh "docker-compose up flyway"
 				sh "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
