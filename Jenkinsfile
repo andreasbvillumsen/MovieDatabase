@@ -37,16 +37,8 @@ pipeline {
 		}
         stage("Deliver Web and Api") {
             steps {
-				parallel(
-					deliverWeb: {
-						sh "docker build ./src/WebUI -t gruppe1devops/todoit-webui"
-						sh "docker push gruppe1devops/todoit-webui"
-					},
-					deliverApi: {
-						sh "docker build ./src/API -t gruppe1devops/todoit-api"
-						sh "docker push gruppe1devops/todoit-api"
-					}
-				)
+                sh "docker build . -t gruppe1devops/moviedatabase"
+				sh "docker push gruppe1devops/moviedatabase"
             }
         }
         stage("Release staging environment") {
