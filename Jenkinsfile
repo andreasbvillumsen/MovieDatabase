@@ -26,7 +26,7 @@ pipeline {
 
 		stage("Login on dockerhub") {
 			steps {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'DockerHubID', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
+				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'dockerhub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']])
 				{
 					sh 'docker login -u ${USERNAME} -p ${PASSWORD}'	
 				}
@@ -35,16 +35,8 @@ pipeline {
 
         stage("Deliver Web") {
             steps {
-				parallel(
-					deliverWeb: {
-						sh "docker build ./src/WebUI -t gruppe1devops/todoit-webui"
-						sh "docker push gruppe1devops/todoit-webui"
-					},
-					deliverApi: {
-						sh "docker build ./src/API -t gruppe1devops/todoit-api"
-						sh "docker push gruppe1devops/todoit-api"
-					}
-				)
+                sh "docker build ./src/WebUI -t gruppe1devops/moviedatabase"
+				sh "docker push gruppe1devops/todoit-webui"
             }
         }
 
