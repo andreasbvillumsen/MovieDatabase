@@ -1,0 +1,2 @@
+ALTER TABLE [dbo].[Movie]
+ALTER COLUMN [Price] DECIMAL(5,2) NOT NULL
