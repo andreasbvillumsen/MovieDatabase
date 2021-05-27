@@ -7,11 +7,16 @@ pipeline {
     stages {
         stage('Docker down') {
             steps {
-                sh "docker-compose down"
 				sh "docker-compose -p staging down"
                 sh "docker-compose -p production down"
 			}
 		}
+
+        stage("Build database") {
+            steps {
+				sh "docker-compose -p production up -d flyway"
+            }
+        }
 
         stage("Release to prod") {
             steps {

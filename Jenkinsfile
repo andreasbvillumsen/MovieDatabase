@@ -7,7 +7,6 @@ pipeline {
     stages {
         stage('Docker down') {
             steps {
-                sh "docker-compose down"
 				sh "docker-compose -p staging down"
                 sh "docker-compose -p production down"
 			}
@@ -15,7 +14,6 @@ pipeline {
 
 		stage('Build web') {
             steps {
-				// sh "dotnet build MovieDatabase/MovieDatabase.csproj"
 				sh "dotnet build"
                 sh "docker build . -t gruppe1devops/moviedatabase"
 			}
@@ -44,8 +42,7 @@ pipeline {
 
         stage("Build database") {
             steps {
-                sh "docker-compose -p staging pull"
-				sh "docker-compose -p staging up flyway"
+				sh "docker-compose -p staging up -d flyway"
             }
         }
 
