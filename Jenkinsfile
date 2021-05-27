@@ -34,16 +34,16 @@ pipeline {
             }
         }
 
-        stage("Release staging environment") {
-            steps {
-				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.prod.yml up -d web"
-            }
-        }
-
         stage("Build database") {
             steps {
                 sh "docker-compose pull"
 				sh "docker-compose up flyway"
+            }
+        }
+
+        stage("Release staging environment") {
+            steps {
+				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
 
