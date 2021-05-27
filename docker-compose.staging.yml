@@ -11,3 +11,7 @@ services:
   database: 
     ports:
       - 1433:1433
+
+  flyway:
+    volumes:
+      - ./db/conf:/flyway/conf
