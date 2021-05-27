@@ -23,17 +23,6 @@ namespace MovieDatabase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            String DBString;
-
-            if (CurrentEnvironment.IsProduction())
-            {
-                DBString = "Data Source=database,1434;Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld";
-            }
-            else
-            {
-                DBString = "Data Source=database,1433;Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld";
-            }
-
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieContext>(options =>
