@@ -14,6 +14,7 @@ services:
     environment: 
       ACCEPT_EULA: "Y"
       SA_PASSWORD: HelloW0rld
+      MSSQL_SA_PASSWORD: HelloW0rld
       MSSQL_DB: MovieDatabase
 
   flyway:
