@@ -14,7 +14,6 @@ pipeline {
 
 		stage('Build web') {
             steps {
-				// sh "dotnet build MovieDatabase/MovieDatabase.csproj"
 				sh "dotnet build"
                 sh "docker build . -t gruppe1devops/moviedatabase"
 			}
@@ -43,6 +42,7 @@ pipeline {
 
         stage("Build database") {
             steps {
+                sh "docker-compose -p staging pull"
 				sh "docker-compose -p staging up flyway"
             }
         }
