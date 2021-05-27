@@ -11,14 +11,12 @@ namespace MovieDatabase
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration, IWebHostEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            CurrentEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
-        public IWebHostEnvironment CurrentEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -26,7 +24,7 @@ namespace MovieDatabase
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieContext>(options =>
-                options.UseSqlServer("Data Source=database,1433;Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld")
+                options.UseSqlServer(Environment.GetEnvironmentVariable("connectionString"))
             );
         }
 
