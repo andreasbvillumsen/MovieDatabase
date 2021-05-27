@@ -5,5 +5,10 @@ services:
     environment: 
       EnvironmentName: Staging
       ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_DB_PORT: 1434
     ports: 
       - 1080:80
+
+  database:
+    ports:
+      - 1434:1433

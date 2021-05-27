@@ -24,7 +24,7 @@ namespace MovieDatabase
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieContext>(options =>
-                options.UseSqlServer(Environment.GetEnvironmentVariable("connectionString"))
+                options.UseSqlServer("Data Source=database," + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PORT") + ";Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld")
             );
         }
 
