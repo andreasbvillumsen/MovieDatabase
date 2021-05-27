@@ -34,22 +34,16 @@ pipeline {
             }
         }
 
-        stage("Build database") {
-            steps {
-                sh "docker-compose pull"
-				sh "docker-compose up flyway"
-            }
-        }
-
         stage("Release staging environment") {
             steps {
 				sh "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
 
-        stage("Automated acceptance test") {
+        stage("Build database") {
             steps {
-                echo "===== REQUIRED: Will use Selenium to execute automatic acceptance tests ====="
+                sh "docker-compose pull"
+				sh "docker-compose up flyway"
             }
         }
     }
