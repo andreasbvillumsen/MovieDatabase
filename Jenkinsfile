@@ -9,7 +9,7 @@ pipeline {
             steps {
 				// sh "dotnet build MovieDatabase/MovieDatabase.csproj"
 				sh "dotnet build"
-                sh "docker build . -t gruppe1devops/moviedatabase:${BUILD_NUMBER}"
+                sh "docker build . -t gruppe1devops/moviedatabase"
 			}
 		}
 
@@ -30,7 +30,13 @@ pipeline {
 
         stage("Deliver Web") {
             steps {
-				sh "docker push gruppe1devops/moviedatabase:${BUILD_NUMBER}"
+				sh "docker push gruppe1devops/moviedatabase"
+            }
+        }
+
+        stage("Release staging environment") {
+            steps {
+				sh "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
 
@@ -38,12 +44,6 @@ pipeline {
             steps {
                 sh "docker-compose pull"
 				sh "docker-compose up flyway"
-            }
-        }
-
-        stage("Release staging environment") {
-            steps {
-				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
 
