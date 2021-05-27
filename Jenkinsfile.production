@@ -14,7 +14,7 @@ pipeline {
 
         stage("Build database") {
             steps {
-                sh "docker-compose pull"
+                sh "docker build . -t gruppe1devops/moviedatabase"
 				sh "docker-compose -p production up flyway"
             }
         }
