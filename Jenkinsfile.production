@@ -12,12 +12,6 @@ pipeline {
 			}
 		}
 
-        stage("Build database") {
-            steps {
-				sh "docker-compose -p production up -d flyway"
-            }
-        }
-
         stage("Release to prod") {
             steps {
                 sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml up -d web"
