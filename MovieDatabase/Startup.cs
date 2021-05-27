@@ -19,12 +19,19 @@ namespace MovieDatabase
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services, IWebHostEnvironment env)
         {
+            String DBString = "connectionStringDev";
+
+            if (env.IsProduction())
+            {
+                DBString = "connectionStringProd";
+            }
+
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieContext>(options =>
-                options.UseSqlServer("Data Source=database," + Environment.GetEnvironmentVariable("ASPNETCORE_DB_PORT") + ";Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld")
+                options.UseSqlServer(Environment.GetEnvironmentVariable(DBString))
             );
         }
 
