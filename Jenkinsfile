@@ -55,7 +55,7 @@ pipeline {
 
         stage("Release to prod") {
             steps {
-                sh "heroku container:push dyno"
+                sh "heroku container:push dyno --app fierce-wave-66466"
             }
         }
     }
