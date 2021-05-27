@@ -1,0 +1,9 @@
+version: "3.3"
+
+services: 
+  web:
+    environment: 
+      EnvironmentName: Staging
+      ASPNETCORE_ENVIRONMENT: Development
+    ports: 
+      - 1080:80

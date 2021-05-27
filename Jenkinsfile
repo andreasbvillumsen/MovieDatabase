@@ -43,20 +43,13 @@ pipeline {
 
         stage("Release staging environment") {
             steps {
-				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.prod.yml up -d web"
-            }
-        }
-
-        stage("Heroku login") {
-            steps {
-                sh "docker login --username=andreas@villumsen.org --password=6a1078b8-ea8d-4468-afa8-299ee3c2bd5b registry.heroku.com"
-                sh "HEROKU_API_KEY=6a1078b8-ea8d-4468-afa8-299ee3c2bd5b"
+				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.staging.yml up -d web"
             }
         }
 
         stage("Release to prod") {
             steps {
-                sh "heroku container:push dyno --app fierce-wave-66466"
+                sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
     }
