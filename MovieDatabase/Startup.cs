@@ -24,7 +24,7 @@ namespace MovieDatabase
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieContext>(options =>
-                options.UseSqlServer(Environment.GetEnvironmentVariable("DatabaseConnectionString"))
+                options.UseSqlServer(Environment.GetEnvironmentVariable("connectionString"))
             );
         }
 

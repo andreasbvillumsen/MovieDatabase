@@ -5,10 +5,17 @@ pipeline {
 		pollSCM 'H/3 * * * *'
 	}
     stages {
+        stage('Docker down') {
+            steps {
+				sh "docker-compose down"
+			}
+		}
+
 		stage('Build web') {
             steps {
 				// sh "dotnet build MovieDatabase/MovieDatabase.csproj"
 				sh "dotnet build"
+                sh "docker build . -t gruppe1devops/moviedatabase"
 			}
 		}
 
@@ -29,27 +36,20 @@ pipeline {
 
         stage("Deliver Web") {
             steps {
-                sh "docker build . -t gruppe1devops/moviedatabase"
 				sh "docker push gruppe1devops/moviedatabase"
             }
         }
 
         stage("Build database") {
             steps {
-                sh "docker-compose pull"
-				sh "docker-compose up flyway"
+                sh "docker-compose -p staging pull"
+				sh "docker-compose -p staging up flyway"
             }
         }
 
         stage("Release staging environment") {
             steps {
-				sh "docker-compose -f docker-compose.yml -f docker-compose.prod.yml up -d web"
-            }
-        }
-
-        stage("Automated acceptance test") {
-            steps {
-                echo "===== REQUIRED: Will use Selenium to execute automatic acceptance tests ====="
+				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.staging.yml up -d web"
             }
         }
     }

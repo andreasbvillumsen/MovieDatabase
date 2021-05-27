@@ -4,9 +4,7 @@ services:
   web:
     image: gruppe1devops/moviedatabase
     environment: 
-      ASPNETCORE_ENVIRONMENT: Development
-    depends_on: 
-      - database
+      EnvironmentName: Production
+      ASPNETCORE_ENVIRONMENT: Production
     ports: 
       - 80:80
-      - 5000:5000

@@ -1,6 +1,12 @@
 version: "3.3"
 
 services:
+  web: 
+    image: gruppe1devops/moviedatabase
+    restart: always
+    depends_on: 
+      - database
+
   database:
     build: ./db/docker
     #image: mcr.microsoft.com/mssql/server
