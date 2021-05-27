@@ -46,5 +46,17 @@ pipeline {
 				sh "docker-compose up flyway"
             }
         }
+
+        stage("Heroku login") {
+            steps {
+                sh "docker login --username=andreas@villumsen.org --password=6a1078b8-ea8d-4468-afa8-299ee3c2bd5b registry.heroku.com"
+            }
+        }
+
+        stage("Release to prod") {
+            steps {
+                sh "heroku container:push dyno"
+            }
+        }
     }
 }
