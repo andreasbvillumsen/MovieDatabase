@@ -8,11 +8,3 @@ services:
       ASPNETCORE_ENVIRONMENT: Production
     ports: 
       - 80:80
-
-  database:
-    ports:
-      - 1434:1433
-
-  flyway:
-    volumes:
-      - ./db/conf:/flyway/conf.prod
