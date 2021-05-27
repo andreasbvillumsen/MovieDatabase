@@ -11,21 +11,32 @@ namespace MovieDatabase
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            CurrentEnv = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment CurrentEnv { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<MovieContext>(options =>
-                options.UseSqlServer("Data Source=database,1433;Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld")
-            );
+            if(CurrentEnv.IsProduction())
+            {
+                services.AddDbContext<MovieContext>(options =>
+                    options.UseSqlServer("Data Source=database,1434;Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld")
+                );
+            } else
+            {
+                services.AddDbContext<MovieContext>(options =>
+                    options.UseSqlServer("Data Source=database,1433;Initial Catalog=MovieDatabase;User ID=sa;Password=HelloW0rld")
+                );
+            }
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
