@@ -5,6 +5,12 @@ pipeline {
 		pollSCM 'H/3 * * * *'
 	}
     stages {
+        stage('Docker down') {
+            steps {
+				sh "docker-compose down"
+			}
+		}
+
 		stage('Build web') {
             steps {
 				// sh "dotnet build MovieDatabase/MovieDatabase.csproj"
