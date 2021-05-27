@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+	triggers {
+		// cron 'H * * * *'
+		pollSCM 'H/3 * * * *'
+	}
+    stages {
+        stage('Docker down') {
+            steps {
+				sh "docker-compose down"
+			}
+		}
+
+        stage("Release to prod") {
+            steps {
+                sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml up -d web"
+            }
+        }
+    }
+}

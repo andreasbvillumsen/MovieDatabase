@@ -52,11 +52,5 @@ pipeline {
 				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.staging.yml up -d web"
             }
         }
-
-        stage("Release to prod") {
-            steps {
-                sh "docker-compose -p production -f docker-compose.yml -f docker-compose.prod.yml up -d web"
-            }
-        }
     }
 }
