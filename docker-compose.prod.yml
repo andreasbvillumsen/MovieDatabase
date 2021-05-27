@@ -6,7 +6,7 @@ services:
     environment: 
       EnvironmentName: Production
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_DB_PORT: 1433
+      ASPNETCORE_DB_PORT: 1434
     ports: 
       - 80:80
 
