@@ -12,9 +12,15 @@ pipeline {
 			}
 		}
 
+        stage('Build web') {
+            steps {
+				sh "dotnet build"
+                sh "docker build . -t gruppe1devops/moviedatabase"
+			}
+		}
+
         stage("Build database") {
             steps {
-                sh "docker build . -t gruppe1devops/moviedatabase"
 				sh "docker-compose -p production up flyway"
             }
         }
