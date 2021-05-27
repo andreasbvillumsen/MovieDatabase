@@ -43,7 +43,7 @@ pipeline {
 
         stage("Release staging environment") {
             steps {
-				sh "docker-compose  -f docker-compose.yml -f docker-compose.prod.yml up -d web"
+				sh "docker-compose -p staging -f docker-compose.yml -f docker-compose.prod.yml up -d web"
             }
         }
 
