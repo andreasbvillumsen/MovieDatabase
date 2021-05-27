@@ -14,7 +14,7 @@ pipeline {
 
         stage("Build database") {
             steps {
-				sh "docker-compose -p up flyway"
+				sh "docker-compose up flyway"
             }
         }
 
