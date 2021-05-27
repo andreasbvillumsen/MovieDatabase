@@ -33,7 +33,7 @@ namespace MovieDatabase
             services.AddControllersWithViews();
 
             services.AddDbContext<MovieContext>(options =>
-                options.UseSqlServer(Environment.GetEnvironmentVariable(DBString))
+                options.UseSqlServer(DBString)
             );
         }
 
