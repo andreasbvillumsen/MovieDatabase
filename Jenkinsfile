@@ -50,6 +50,7 @@ pipeline {
         stage("Heroku login") {
             steps {
                 sh "docker login --username=andreas@villumsen.org --password=6a1078b8-ea8d-4468-afa8-299ee3c2bd5b registry.heroku.com"
+                sh "HEROKU_API_KEY=6a1078b8-ea8d-4468-afa8-299ee3c2bd5b"
             }
         }
 
